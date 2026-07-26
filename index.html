@@ -3,419 +3,315 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consultorio Agustina · Números claros</title>
+<title>Agustina Robledo · Medicina Estética</title>
+<meta name="description" content="Consultorio de medicina estética de Agustina Robledo. Toxina botulínica, mesoterapia, plasma rico en plaquetas, bioestimuladores y skincare médico. Turnos por WhatsApp.">
+<meta property="og:title" content="Agustina Robledo · Medicina Estética">
+<meta property="og:description" content="Tratamientos médico-estéticos con criterio clínico y resultados naturales. Reservá tu consulta por WhatsApp.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F3F6F4; --card:#FFFFFF; --ink:#182320; --muted:#5E6E68;
-  --verde:#0B6B57; --verdeSoft:#DFEDE7; --rosa:#C4837B; --rosaSoft:#F6E9E7;
-  --oro:#A8842C; --line:#E3E9E6; --neg:#B04A3E;
+  --bg:#F6F4F0; --card:#FFFFFF; --ink:#1D2422; --muted:#65706C;
+  --verde:#0B6B57; --verdeOscuro:#08483B; --verdeSoft:#E4EEE9;
+  --rosa:#C4837B; --rosaSoft:#F7ECEA; --oro:#A8842C; --line:#E6E3DC;
   --disp:'Fraunces', Georgia, serif; --body:'Instrument Sans', system-ui, sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1040px;margin:0 auto;padding:0 18px 80px}
-header.top{padding:34px 0 10px}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--verde);font-weight:600}
-h1{font-family:var(--disp);font-weight:600;font-size:clamp(28px,5.5vw,44px);line-height:1.08;margin:8px 0 6px}
-.sub{color:var(--muted);font-size:15px;max-width:620px}
-nav.tabs{position:sticky;top:0;z-index:50;background:var(--bg);padding:14px 0 12px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-nav.tabs::-webkit-scrollbar{display:none}
-.tab{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:var(--body)}
-.tab.on{background:var(--verde);border-color:var(--verde);color:#fff}
-.tab:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
-section.pane{display:none;animation:fade .25s ease}
-section.pane.on{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){section.pane{animation:none}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px}
-.card h2{font-family:var(--disp);font-weight:600;font-size:21px;margin-bottom:4px}
-.card .note{color:var(--muted);font-size:13px}
-.hero-num{font-family:var(--disp);font-weight:700;font-size:clamp(44px,10vw,72px);color:var(--verde);line-height:1}
-.hero-line{font-size:16px;margin-top:4px}
-.cien{margin-top:18px}
-.cien .track{display:flex;height:46px;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
-.cien .seg{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;min-width:52px;transition:width .6s ease}
-.seg.costo{background:var(--rosa)}
-.seg.gana{background:var(--verde)}
-.cien .leg{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-.kpi .l{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.kpi .v{font-family:var(--disp);font-size:26px;font-weight:600;margin-top:4px}
-.kpi .s{font-size:12px;color:var(--muted);margin-top:2px}
-.v.pos{color:var(--verde)} .v.neg{color:var(--neg)} .v.oro{color:var(--oro)}
-.chartbox{position:relative;width:100%;height:320px;margin-top:14px}
-.chartbox.tall{height:360px}
-select{font-family:var(--body);font-size:15px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;width:100%;max-width:320px}
-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
-th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-th:first-child,td:first-child{text-align:left;white-space:normal}
-thead th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-tr.hl td{background:var(--verdeSoft);font-weight:700}
-.tblwrap{overflow-x:auto}
-.pill{display:inline-block;background:var(--verdeSoft);color:var(--verde);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700}
-.pill.r{background:var(--rosaSoft);color:var(--rosa)}
-.callout{border-left:3px solid var(--oro);background:#FBF7EE;border-radius:0 14px 14px 0;padding:14px 16px;font-size:14px;margin-top:16px}
-.callout b{color:var(--oro)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:760px){.grid2{grid-template-columns:1fr}}
-footer{margin-top:40px;font-size:12px;color:var(--muted)}
-.negtxt{color:var(--neg);font-weight:700}
-.postxt{color:var(--verde);font-weight:700}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+
+/* ── nav ── */
+nav{position:sticky;top:0;z-index:60;background:rgba(246,244,240,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:40px;height:40px}
+.brand .bt{line-height:1.1}
+.brand .bt b{font-family:var(--disp);font-weight:600;font-size:17px;display:block;letter-spacing:.01em}
+.brand .bt span{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--verde);font-weight:600}
+.nav-links{display:flex;gap:22px;font-size:14px;font-weight:600}
+.nav-links a{text-decoration:none;color:var(--muted)}
+.nav-links a:hover{color:var(--verde)}
+.btn{display:inline-block;background:var(--verde);color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:11px 20px;border-radius:999px;border:none;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--verdeOscuro)}
+.btn.ghost{background:transparent;color:var(--verde);border:1.5px solid var(--verde)}
+.btn.ghost:hover{background:var(--verdeSoft)}
+.btn.big{font-size:16px;padding:14px 28px}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* ── hero ── */
+.hero{padding:72px 0 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-140px;top:-120px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,var(--verdeSoft) 0%,transparent 68%);pointer-events:none}
+.hero::after{content:'';position:absolute;left:-160px;bottom:-200px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,var(--rosaSoft) 0%,transparent 66%);pointer-events:none}
+.hero .in{position:relative;max-width:640px}
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--verde);font-weight:700}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(34px,6.4vw,58px);line-height:1.06;margin:14px 0 18px}
+h1 em{font-style:italic;color:var(--verde)}
+.hero p{font-size:17px;color:var(--muted);max-width:520px}
+.hero .ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.hero .fino{margin-top:18px;font-size:13px;color:var(--muted)}
+
+/* ── secciones ── */
+section{padding:64px 0}
+.sec-head{max-width:560px;margin-bottom:36px}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.12}
+.sec-head p{color:var(--muted);margin-top:10px;font-size:15.5px}
+.klein{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--rosa);font-weight:700;margin-bottom:10px;display:block}
+
+/* tratamientos */
+.tx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.tx{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;gap:10px;transition:transform .15s,box-shadow .15s}
+.tx:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(24,35,32,.07)}
+.tx .ic{width:46px;height:46px;border-radius:14px;background:var(--verdeSoft);display:flex;align-items:center;justify-content:center}
+.tx .ic svg{width:24px;height:24px;stroke:var(--verde)}
+.tx h3{font-family:var(--disp);font-weight:600;font-size:19px}
+.tx p{font-size:14px;color:var(--muted);flex:1}
+.tx a{font-size:13.5px;font-weight:700;color:var(--verde);text-decoration:none}
+.tx a:hover{text-decoration:underline}
+
+/* sobre */
+.sobre{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sobre .cols{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:center}
+@media(max-width:820px){.sobre .cols{grid-template-columns:1fr;gap:28px}}
+.retrato{aspect-ratio:4/5;border-radius:24px;background:linear-gradient(160deg,var(--verdeSoft),var(--rosaSoft));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.retrato svg{width:120px;height:120px;opacity:.9}
+.retrato .ph{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sobre h2{margin-bottom:14px}
+.sobre .bio p{color:var(--muted);font-size:15.5px;margin-bottom:12px}
+.credenciales{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.cred{background:var(--verdeSoft);color:var(--verdeOscuro);font-size:12.5px;font-weight:700;border-radius:999px;padding:7px 14px}
+
+/* proceso */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;counter-reset:paso}
+.paso{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;position:relative}
+.paso::before{counter-increment:paso;content:counter(paso,decimal-leading-zero);font-family:var(--disp);font-size:34px;font-weight:600;color:var(--rosa);opacity:.55;display:block;margin-bottom:8px}
+.paso h3{font-family:var(--disp);font-size:18px;font-weight:600;margin-bottom:6px}
+.paso p{font-size:14px;color:var(--muted)}
+
+/* faq */
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-bottom:10px}
+details summary{font-weight:700;font-size:15.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:'+';font-family:var(--disp);font-size:22px;color:var(--verde);flex-shrink:0;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:10px;font-size:14.5px;color:var(--muted)}
+
+/* contacto */
+.contacto{background:var(--verdeOscuro);color:#F2F0EA;border-radius:28px;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+.contacto::before{content:'';position:absolute;inset:14px;border:1px solid rgba(242,240,234,.22);border-radius:20px;pointer-events:none}
+.contacto h2{color:#fff}
+.contacto p{color:rgba(242,240,234,.82);max-width:460px;margin:12px auto 26px;font-size:15.5px}
+.contacto .btn{background:#fff;color:var(--verdeOscuro)}
+.contacto .btn:hover{background:var(--verdeSoft)}
+.contacto .datos{margin-top:26px;font-size:14px;color:rgba(242,240,234,.75);display:flex;gap:8px 26px;justify-content:center;flex-wrap:wrap}
+@media(max-width:600px){.contacto{padding:44px 22px}}
+
+/* footer */
+footer{padding:38px 0 46px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{text-decoration:none}
+footer a:hover{color:var(--verde)}
+.panel-link{opacity:.55;font-size:12.5px}
+
+/* whatsapp flotante */
+.wsp{position:fixed;right:18px;bottom:18px;z-index:70;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.22);text-decoration:none}
+.wsp svg{width:30px;height:30px;fill:#fff}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <div class="eyebrow">Consultorio Agustina · ene 2025 → jul 2026</div>
-  <h1>De cada 100 que entran, ¿cuánto queda?</h1>
-  <p class="sub">Todos los números están pasados a dólares (blue vendedor promedio de cada mes) o expresados en porcentajes, para que la inflación no distorsione la comparación.</p>
-</header>
 
-<nav class="tabs" role="tablist">
-  <button class="tab on" data-p="resumen">Resumen</button>
-  <button class="tab" data-p="mes">Mes a mes</button>
-  <button class="tab" data-p="anual">Comparativa anual</button>
-  <button class="tab" data-p="costos">Costos</button>
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#inicio" aria-label="Agustina Robledo, medicina estética">
+      <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37" fill="none" stroke="#0B6B57" stroke-width="1.6"/><circle cx="40" cy="40" r="32" fill="none" stroke="#C4837B" stroke-width=".9"/><text x="40" y="49" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="27" font-weight="600" fill="#1D2422" letter-spacing="1">AR</text></svg>
+      <span class="bt"><b>Agustina Robledo</b><span>Medicina Estética</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#tratamientos">Tratamientos</a>
+      <a href="#sobre">Sobre mí</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn" id="ctaNav" href="#" target="_blank" rel="noopener">Reservar turno</a>
+  </div>
 </nav>
 
-<!-- ══════════ RESUMEN ══════════ -->
-<section class="pane on" id="p-resumen">
-  <div class="card">
-    <h2>¿Cuánto queda por mes, en promedio?</h2>
-    <p class="note">Promedio de los márgenes mensuales de ene 2025 a jul 2026.</p>
-    <div style="margin-top:14px">
-      <span class="hero-num" id="heroPct"></span>
-      <div class="hero-line">En un mes típico, de cada <b>$100</b> que entran quedan <b id="heroQueda"></b> de ganancia y <b id="heroCosto"></b> se van en gastos.</div>
+<header class="hero" id="inicio">
+  <div class="wrap in">
+    <span class="eyebrow">Consultorio de medicina estética</span>
+    <h1>Verte bien, con criterio <em>médico</em>.</h1>
+    <p>Tratamientos estéticos aplicados con mirada clínica: evaluación real, dosis justas y resultados naturales que respetan tu cara y tus tiempos.</p>
+    <div class="ctas">
+      <a class="btn big" id="ctaHero" href="#" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+      <a class="btn big ghost" href="#tratamientos">Ver tratamientos</a>
     </div>
-    <div class="cien">
-      <div class="track" aria-hidden="true">
-        <div class="seg costo" id="segCosto"></div>
-        <div class="seg gana" id="segGana"></div>
+    <p class="fino">Atención con turno previo · Respuesta por WhatsApp en el día</p>
+  </div>
+</header>
+
+<section id="tratamientos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="klein">Tratamientos</span>
+      <h2>Lo que hacemos en el consultorio</h2>
+      <p>Cada tratamiento arranca con una consulta de evaluación. Nunca aplicamos nada que no tenga indicación real.</p>
+    </div>
+    <div class="tx-grid">
+      <div class="tx">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v6m0 0l-2.5 11h5L12 9z"/><path d="M9 6h6"/></svg></div>
+        <h3>Toxina botulínica</h3>
+        <p>Suaviza arrugas de expresión en frente, entrecejo y patas de gallo. Resultado natural: seguís gesticulando, sin el ceño marcado.</p>
+        <a href="#" class="tx-cta" target="_blank" rel="noopener">Consultar por este tratamiento →</a>
       </div>
-      <div class="leg"><span>■ Gastos</span><span>■ Ganancia</span></div>
-    </div>
-  </div>
-
-  <div class="kpis" id="kpisGlobal"></div>
-
-  <div class="card">
-    <h2>Ganancia vs. gastos, mes a mes (%)</h2>
-    <p class="note">Cada barra es un mes llevado a 100: verde es lo que quedó, rosa fuerte lo que se llevaron los <b>gastos fijos</b> (sueldo, redes, alquiler, residuos, contadora) y rosa claro los insumos y varios.</p>
-    <div class="chartbox tall"><canvas id="chPct"></canvas></div>
-  </div>
-
-  <div class="card">
-    <h2>Ganancia mensual y promedio acumulado (US$)</h2>
-    <p class="note">Barras: la ganancia de cada mes. Línea: el promedio mensual acumulado de cada año (cuánto viene dejando por mes el año, hasta ese punto).</p>
-    <div class="chartbox tall"><canvas id="chGan"></canvas></div>
-  </div>
-
-  <div class="card">
-    <h2>Resultados mes a mes</h2>
-    <p class="note">Ganancia parcial de cada mes, acumulado del año y promedio mensual del año hasta ese mes.</p>
-    <div class="tblwrap"><table id="tblRes"></table></div>
-  </div>
-
-  <div class="callout" id="insight"></div>
-</section>
-
-<!-- ══════════ MES A MES ══════════ -->
-<section class="pane" id="p-mes">
-  <div class="card">
-    <h2>Elegí un mes</h2>
-    <div style="margin-top:10px"><select id="selMes" aria-label="Elegir mes"></select></div>
-    <p class="note" id="mesBlue" style="margin-top:8px"></p>
-  </div>
-  <div class="kpis" id="kpisMes"></div>
-  <div class="grid2">
-    <div class="card">
-      <h2>¿En qué se fue la plata?</h2>
-      <p class="note" id="mesDonutNote"></p>
-      <div class="chartbox"><canvas id="chDonut"></canvas></div>
-    </div>
-    <div class="card">
-      <h2>Detalle del mes</h2>
-      <div class="tblwrap"><table id="tblMes"></table></div>
+      <div class="tx">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c4-3.5 7-7.2 7-11a7 7 0 10-14 0c0 3.8 3 7.5 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h3>Mesoterapia facial y capilar</h3>
+        <p>Microinyecciones de activos (vitaminas, enzimas) para mejorar calidad de piel, luminosidad o estimular el crecimiento capilar.</p>
+        <a href="#" class="tx-cta" target="_blank" rel="noopener">Consultar por este tratamiento →</a>
+      </div>
+      <div class="tx">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l2.8 2.8m8.4 8.4L19 19M19 5l-2.8 2.8M7.8 16.2L5 19"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Plasma rico en plaquetas</h3>
+        <p>Bioestimulación con tu propia sangre: regenera la piel desde adentro, mejora textura y da un aspecto descansado.</p>
+        <a href="#" class="tx-cta" target="_blank" rel="noopener">Consultar por este tratamiento →</a>
+      </div>
+      <div class="tx">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c2-1 4-1 6 0s4 1 6 0 3-1 4 0M4 9c2-1 4-1 6 0s4 1 6 0 3-1 4 0M4 19c2-1 4-1 6 0s4 1 6 0 3-1 4 0"/></svg></div>
+        <h3>Bioestimuladores de colágeno</h3>
+        <p>Radiesse y otros inductores que reponen firmeza y estructura donde el tiempo la va aflojando. Efecto progresivo y duradero.</p>
+        <a href="#" class="tx-cta" target="_blank" rel="noopener">Consultar por este tratamiento →</a>
+      </div>
+      <div class="tx">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-1 7a4 4 0 01-6 0L8 3z"/><path d="M12 14v7m-3 0h6"/></svg></div>
+        <h3>Enzimas y exosomas</h3>
+        <p>Protocolos de última generación para redefinir contornos, tratar papada o potenciar la regeneración de la piel.</p>
+        <a href="#" class="tx-cta" target="_blank" rel="noopener">Consultar por este tratamiento →</a>
+      </div>
+      <div class="tx">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 13c1 1.5 2.5 2.3 4 2.3s3-.8 4-2.3M9 9.5h.01M15 9.5h.01"/></svg></div>
+        <h3>Skincare médico</h3>
+        <p>Plan de cuidado de la piel indicado por profesional: limpieza profunda, peelings suaves y rutina a tu medida.</p>
+        <a href="#" class="tx-cta" target="_blank" rel="noopener">Consultar por este tratamiento →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ ANUAL ══════════ -->
-<section class="pane" id="p-anual">
-  <div class="card">
-    <h2>Tabla integral anual</h2>
-    <p class="note">2026 llega hasta julio (en curso): por eso lo más justo es mirar los <b>promedios mensuales</b> y los <b>porcentajes</b>, no los totales.</p>
-    <div class="tblwrap"><table id="tblAnual"></table></div>
+<section class="sobre" id="sobre">
+  <div class="wrap cols">
+    <div class="retrato">
+      <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37" fill="none" stroke="#0B6B57" stroke-width="1.4"/><circle cx="40" cy="40" r="32" fill="none" stroke="#C4837B" stroke-width=".8"/><text x="40" y="49" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="27" font-weight="600" fill="#1D2422" letter-spacing="1">AR</text></svg>
+      <span class="ph">[ Foto de Agustina — pendiente ]</span>
+    </div>
+    <div class="bio">
+      <span class="klein">Sobre mí</span>
+      <h2>Agustina Robledo</h2>
+      <p>[ Bio pendiente — acá va la formación de Agustina, su especialidad y su forma de trabajar. Dos o tres párrafos cortos, en primera persona. ]</p>
+      <p>Mi criterio es simple: menos es más. Prefiero decirte que no a hacer algo que tu cara no necesita. Los mejores resultados son los que nadie nota, pero todos ven.</p>
+      <div class="credenciales">
+        <span class="cred">M.N. [pendiente]</span>
+        <span class="cred">Medicina estética</span>
+        <span class="cred">Atención personalizada</span>
+      </div>
+    </div>
   </div>
-  <div class="card">
-    <h2>La comparación más justa: por hora trabajada</h2>
-    <p class="note">En 2025 Agustina atendió unas <b>9 hs por semana</b> (8 a 10) y en 2026 unas <b>3 hs por semana</b>. Comparar totales no es justo: acá se mide cuánto deja cada hora de trabajo.</p>
-    <div class="kpis" id="kpisHoras" style="margin-top:12px"></div>
-    <div class="callout" id="insightHoras"></div>
-  </div>
-  <div class="card">
-    <h2>Comparación justa: ene–jul de cada año</h2>
-    <p class="note">Mismos siete meses de 2025 vs. 2026, para comparar peras con peras.</p>
-    <div class="tblwrap"><table id="tblEneJul"></table></div>
-  </div>
-  <div class="card">
-    <h2>Estructura de costos por año</h2>
-    <p class="note">De cada $100 gastados en el año, cuánto se llevó cada rubro.</p>
-    <div class="chartbox"><canvas id="chEstructura"></canvas></div>
-  </div>
-  <div class="callout" id="insightAnual"></div>
 </section>
 
-<!-- ══════════ COSTOS ══════════ -->
-<section class="pane" id="p-costos">
-  <div class="kpis" id="kpisCostos"></div>
-  <div class="card">
-    <h2>Costos fijos vs. insumos, mes a mes (US$)</h2>
-    <p class="note">Fijos = sueldo + redes + alquiler + residuos + contadora. Variables = insumos, traslados y otros. La línea es lo facturado: cuando queda cerca de las barras, el mes casi no deja ganancia.</p>
-    <div class="chartbox tall"><canvas id="chFijos"></canvas></div>
+<section id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="klein">Cómo funciona</span>
+      <h2>De la consulta al resultado</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso"><h3>Consulta de evaluación</h3><p>Nos conocemos, escucho qué te gustaría mejorar y evalúo tu piel y tu anatomía.</p></div>
+      <div class="paso"><h3>Plan a medida</h3><p>Te propongo un plan claro: qué sí, qué no, en qué orden y con qué presupuesto.</p></div>
+      <div class="paso"><h3>Tratamiento</h3><p>Aplicación en consultorio, con productos aprobados y técnica cuidada. La mayoría de las sesiones dura menos de una hora.</p></div>
+      <div class="paso"><h3>Seguimiento</h3><p>Control posterior incluido. Quedás en contacto directo conmigo por cualquier duda.</p></div>
+    </div>
   </div>
-  <div class="card">
-    <h2>¿Qué % de lo facturado se lleva cada rubro?</h2>
-    <p class="note">Calculado sobre todo el período y sobre 2026, para ver cómo cambió el peso de cada costo.</p>
-    <div class="tblwrap"><table id="tblRubros"></table></div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="klein">Preguntas frecuentes</span>
+      <h2>Lo que todos preguntan antes de venir</h2>
+    </div>
+    <details>
+      <summary>¿Duelen los tratamientos inyectables?</summary>
+      <p>Son molestias mínimas y muy tolerables. Usamos agujas finas y, cuando hace falta, crema anestésica. La mayoría de los pacientes se sorprende de lo rápido y llevadero que es.</p>
+    </details>
+    <details>
+      <summary>¿Se va a notar que "me hice algo"?</summary>
+      <p>Esa es justamente la idea contraria a cómo trabajamos. Buscamos resultados naturales: que te veas descansada y fresca, no distinta. Las dosis se calculan para tu cara, no por moda.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto duran los resultados?</summary>
+      <p>Depende del tratamiento: la toxina botulínica suele durar entre 4 y 6 meses, los bioestimuladores pueden extenderse a un año o más. En la consulta te digo qué esperar en tu caso puntual.</p>
+    </details>
+    <details>
+      <summary>¿Qué incluye la primera consulta?</summary>
+      <p>Evaluación completa, diagnóstico de piel y un plan de tratamiento con presupuesto claro. Sin compromiso: te llevás el plan y decidís con tiempo.</p>
+    </details>
+    <details>
+      <summary>¿Cómo saco turno?</summary>
+      <p>Por WhatsApp. Escribinos con el botón verde y coordinamos día y horario. Respondemos en el día.</p>
+    </details>
   </div>
-  <div class="callout" id="insightCostos"></div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="contacto" id="contacto">
+      <h2>Tu piel, con plan.</h2>
+      <p>Escribime por WhatsApp y coordinamos tu consulta de evaluación. Contame qué te gustaría mejorar y te oriento desde el primer mensaje.</p>
+      <a class="btn big" id="ctaContacto" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <div class="datos">
+        <span id="datoDir">📍 [Zona / dirección pendiente]</span>
+        <span id="datoIg">✦ Instagram: [pendiente]</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-  Fuente: planilla de ingresos y egresos del consultorio (se analiza desde enero 2025; 2024 quedó afuera a pedido). Dólar blue <b>vendedor</b> promedio mensual (punta más alta, como si los pesos se usaran para comprar dólares — fuente Bluelytics). Los ingresos cobrados en dólares se suman convertidos al blue del mes. Se corrigieron dos fórmulas de la planilla original: feb-2025 (faltaba un sueldo de $80.000) y ago-2025 (faltaba el pago a Valuge de $501.744). Julio 2026 está en curso. Los pedidos «a pagar» se cuentan en el mes en que se pagaron.
+  <div class="wrap cols">
+    <span>© <span id="anio"></span> Agustina Robledo · Medicina Estética</span>
+    <span>Los tratamientos requieren evaluación médica previa.</span>
+    <a class="panel-link" href="panel.html">Acceso interno</a>
+  </div>
 </footer>
-</div>
+
+<a class="wsp" id="ctaFlot" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.3.7 4.5 1.9 6.4L4 29l7.9-1.8c1.8 1 3.9 1.5 6 1.5 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.6c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.7 1.1 1.1-4.5-.3-.4a9.6 9.6 0 01-1.6-5.3c0-5.3 4.5-9.7 10.1-9.7s10.1 4.3 10.1 9.7-4.5 9.8-10 9.8zm5.5-7.3c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.4c.2.2 2.3 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
 
 <script>
-const DATA = [{"m":"2025-01","blue":1227.0,"ing_ars":2696500,"egr_ars":458000,"res_ars":2238500,"ing_usd":2198,"egr_usd":373,"res_usd":1824,"margen":83.0,"cats":{"Redes":85000,"Sueldo Cata":270000,"Alquiler":103000},"fijos":458000,"variables":0,"ing_usd_cash":0},{"m":"2025-02","blue":1223.2,"ing_ars":1376960,"egr_ars":1177500,"res_ars":199460,"ing_usd":1126,"egr_usd":963,"res_usd":163,"margen":14.5,"cats":{"Sueldo Cata":80000,"Insumos":886570,"Traslados":6000,"Redes":96050,"Alquiler":108880},"fijos":284930,"variables":892570,"ing_usd_cash":300},{"m":"2025-03","blue":1259.0,"ing_ars":2414000,"egr_ars":1459173,"res_ars":954827,"ing_usd":1917,"egr_usd":1159,"res_usd":758,"margen":39.6,"cats":{"Sueldo Cata":150000,"Insumos":1093893,"Redes":96000,"Alquiler":114280,"Traslados":5000},"fijos":360280,"variables":1098893,"ing_usd_cash":0},{"m":"2025-04","blue":1270.7,"ing_ars":3776748,"egr_ars":1677773,"res_ars":2098975,"ing_usd":2972,"egr_usd":1320,"res_usd":1652,"margen":55.6,"cats":{"Insumos":1267495,"Redes":96050,"Sueldo Cata":200000,"Alquiler":114228},"fijos":410278,"variables":1267495,"ing_usd_cash":640},{"m":"2025-05","blue":1172.7,"ing_ars":5723814,"egr_ars":2410468,"res_ars":3313346,"ing_usd":4881,"egr_usd":2055,"res_usd":2825,"margen":57.9,"cats":{"Sueldo Cata":340000,"Insumos":1588468,"Otros":160000,"Alquiler":122000,"Redes":200000},"fijos":662000,"variables":1748468,"ing_usd_cash":940},{"m":"2025-06","blue":1191.4,"ing_ars":1323700,"egr_ars":720670,"res_ars":603030,"ing_usd":1111,"egr_usd":605,"res_usd":506,"margen":45.6,"cats":{"Insumos":213350,"Sueldo Cata":507320},"fijos":507320,"variables":213350,"ing_usd_cash":0},{"m":"2025-07","blue":1295.2,"ing_ars":4011030,"egr_ars":934464,"res_ars":3076566,"ing_usd":3097,"egr_usd":721,"res_usd":2375,"margen":76.7,"cats":{"Alquiler":144000,"Sueldo Cata":57000,"Insumos":733464},"fijos":201000,"variables":733464,"ing_usd_cash":150},{"m":"2025-08","blue":1337.6,"ing_ars":3452890,"egr_ars":1797227,"res_ars":1655663,"ing_usd":2581,"egr_usd":1344,"res_usd":1238,"margen":48.0,"cats":{"Insumos":1287527,"Redes":100000,"Sueldo Cata":250000,"Alquiler":144000,"Traslados":15700},"fijos":494000,"variables":1303227,"ing_usd_cash":400},{"m":"2025-09","blue":1420.0,"ing_ars":1926650,"egr_ars":494000,"res_ars":1432650,"ing_usd":1357,"egr_usd":348,"res_usd":1009,"margen":74.4,"cats":{"Alquiler":144000,"Sueldo Cata":250000,"Redes":100000},"fijos":494000,"variables":0,"ing_usd_cash":200},{"m":"2025-10","blue":1471.7,"ing_ars":3587265,"egr_ars":1571080,"res_ars":2016185,"ing_usd":2437,"egr_usd":1068,"res_usd":1370,"margen":56.2,"cats":{"Sueldo Cata":350000,"Alquiler":144000,"Insumos":1077080},"fijos":494000,"variables":1077080,"ing_usd_cash":450},{"m":"2025-11","blue":1435.2,"ing_ars":2424695,"egr_ars":1057604,"res_ars":1367091,"ing_usd":1689,"egr_usd":737,"res_usd":953,"margen":56.4,"cats":{"Insumos":563604,"Sueldo Cata":250000,"Redes":100000,"Alquiler":144000},"fijos":494000,"variables":563604,"ing_usd_cash":350},{"m":"2025-12","blue":1476.5,"ing_ars":3955000,"egr_ars":494000,"res_ars":3461000,"ing_usd":2679,"egr_usd":335,"res_usd":2344,"margen":87.5,"cats":{"Alquiler":144000,"Sueldo Cata":250000,"Redes":100000},"fijos":494000,"variables":0,"ing_usd_cash":220},{"m":"2026-01","blue":1502.3,"ing_ars":2458000,"egr_ars":2118880,"res_ars":339120,"ing_usd":1636,"egr_usd":1410,"res_usd":226,"margen":13.8,"cats":{"Alquiler":192000,"Sueldo Cata":250000,"Redes":100000,"Insumos":1576880},"fijos":542000,"variables":1576880,"ing_usd_cash":0},{"m":"2026-02","blue":1436.0,"ing_ars":986300,"egr_ars":606000,"res_ars":380300,"ing_usd":687,"egr_usd":422,"res_usd":265,"margen":38.6,"cats":{"Redes":100000,"Contadora":40000,"Residuos":48000,"Sueldo Cata":250000,"Alquiler":168000},"fijos":606000,"variables":0,"ing_usd_cash":300},{"m":"2026-03","blue":1420.9,"ing_ars":612000,"egr_ars":566000,"res_ars":46000,"ing_usd":431,"egr_usd":398,"res_usd":32,"margen":7.5,"cats":{"Alquiler":168000,"Residuos":48000,"Sueldo Cata":250000,"Redes":100000},"fijos":566000,"variables":0,"ing_usd_cash":0},{"m":"2026-04","blue":1408.0,"ing_ars":1776525,"egr_ars":1210100,"res_ars":566425,"ing_usd":1262,"egr_usd":859,"res_usd":402,"margen":31.9,"cats":{"Sueldo Cata":250000,"Redes":100000,"Residuos":53500,"Insumos":638600,"Alquiler":168000},"fijos":571500,"variables":638600,"ing_usd_cash":400},{"m":"2026-05","blue":1418.6,"ing_ars":1579650,"egr_ars":694500,"res_ars":885150,"ing_usd":1114,"egr_usd":490,"res_usd":624,"margen":56.0,"cats":{"Sueldo Cata":350000,"Redes":100000,"Alquiler":190000,"Residuos":54500},"fijos":694500,"variables":0,"ing_usd_cash":250},{"m":"2026-06","blue":1472.7,"ing_ars":1047100,"egr_ars":929100,"res_ars":118000,"ing_usd":711,"egr_usd":631,"res_usd":80,"margen":11.3,"cats":{"Alquiler":190000,"Sueldo Cata":250000,"Redes":100000,"Insumos":200000,"Contadora":134600,"Residuos":54500},"fijos":729100,"variables":200000,"ing_usd_cash":0},{"m":"2026-07","blue":1521.7,"ing_ars":640000,"egr_ars":350000,"res_ars":290000,"ing_usd":421,"egr_usd":230,"res_usd":191,"margen":45.3,"cats":{"Sueldo Cata":250000,"Redes":100000},"fijos":350000,"variables":0,"ing_usd_cash":0}];
-const MESES_ES = {'01':'Enero','02':'Febrero','03':'Marzo','04':'Abril','05':'Mayo','06':'Junio','07':'Julio','08':'Agosto','09':'Septiembre','10':'Octubre','11':'Noviembre','12':'Diciembre'};
-const mesLabel = m => MESES_ES[m.slice(5)] + ' ' + m.slice(0,4);
-const mesCorto = m => MESES_ES[m.slice(5)].slice(0,3) + ' ' + m.slice(2,4);
-const fUSD = n => 'US$ ' + Math.round(n).toLocaleString('es-AR');
-const fARS = n => '$ ' + Math.round(n).toLocaleString('es-AR');
-const fPct = n => n.toLocaleString('es-AR',{maximumFractionDigits:1}) + '%';
-const CATS = ['Insumos','Sueldo Cata','Redes','Alquiler','Residuos','Contadora','Traslados','Otros'];
-const CATCOL = {'Insumos':'#C4837B','Sueldo Cata':'#0B6B57','Redes':'#4E9C86','Alquiler':'#7FB6A4','Residuos':'#B7C9C0','Contadora':'#94A8A0','Traslados':'#D9C08A','Otros':'#C9CFCB'};
-Chart.defaults.font.family = "'Instrument Sans', system-ui, sans-serif";
-Chart.defaults.color = '#5E6E68';
-
-// ── agregados centrados en resultados mensuales ──
-const margenProm = DATA.reduce((a,x)=>a+x.margen,0)/DATA.length;
-const anio = y => DATA.filter(x=>x.m.startsWith(y));
-const promGan = ms => ms.reduce((a,x)=>a+x.res_usd,0)/ms.length;
-const promMar = ms => ms.reduce((a,x)=>a+x.margen,0)/ms.length;
-const y25 = anio('2025'), y26 = anio('2026');
-const b25 = [...y25].sort((a,b)=>b.margen-a.margen)[0], w25 = [...y25].sort((a,b)=>a.margen-b.margen)[0];
-const b26 = [...y26].sort((a,b)=>b.margen-a.margen)[0], w26 = [...y26].sort((a,b)=>a.margen-b.margen)[0];
-
-// hero
-document.getElementById('heroPct').textContent = fPct(margenProm);
-document.getElementById('heroQueda').textContent = '$' + Math.round(margenProm);
-document.getElementById('heroCosto').textContent = '$' + Math.round(100-margenProm);
-const segC = document.getElementById('segCosto'), segG = document.getElementById('segGana');
-segC.style.width = (100-margenProm)+'%'; segC.textContent = Math.round(100-margenProm);
-segG.style.width = margenProm+'%'; segG.textContent = Math.round(margenProm);
-
-function kpi(l,v,s,cls){return `<div class="kpi"><div class="l">${l}</div><div class="v ${cls||''}">${v}</div>${s?`<div class="s">${s}</div>`:''}</div>`}
-document.getElementById('kpisGlobal').innerHTML =
-  kpi('Margen promedio 2025', fPct(promMar(y25)), 'ganancia promedio: '+fUSD(promGan(y25))+' por mes', 'pos') +
-  kpi('Margen promedio 2026', fPct(promMar(y26)), 'ganancia promedio: '+fUSD(promGan(y26))+' por mes', promMar(y26)<30?'neg':'') +
-  kpi('Mejor mes 2025', mesLabel(b25.m), fPct(b25.margen)+' de margen · '+fUSD(b25.res_usd), 'pos') +
-  kpi('Peor mes 2025', mesLabel(w25.m), fPct(w25.margen)+' de margen · '+fUSD(w25.res_usd)) +
-  kpi('Mejor mes 2026', mesLabel(b26.m), fPct(b26.margen)+' de margen · '+fUSD(b26.res_usd)) +
-  kpi('Peor mes 2026', mesLabel(w26.m), fPct(w26.margen)+' de margen · '+fUSD(w26.res_usd), 'neg') +
-  kpi('Ganancia total 2025', fUSD(y25.reduce((a,x)=>a+x.res_usd,0)), '12 meses') +
-  kpi('Ganancia total 2026', fUSD(y26.reduce((a,x)=>a+x.res_usd,0)), y26.length+' meses (en curso)', 'oro');
-
-// insight resumen
-document.getElementById('insight').innerHTML =
-  `<b>Lo más importante:</b> en 2025 un mes típico dejaba el <b>${fPct(promMar(y25))}</b> de lo que entraba (unos <b>${fUSD(promGan(y25))}</b> de ganancia por mes). En 2026 el mes típico deja el <b>${fPct(promMar(y26))}</b> (<b>${fUSD(promGan(y26))}</b> por mes). Como los gastos fijos son los mismos, cada peso que deja de entrar sale directo de la ganancia.`;
-
-// gráfico 100% apilado: % ganancia vs % gastos fijos vs % insumos por mes
-const labels = DATA.map(x=>mesCorto(x.m));
-const fijPctM = DATA.map(x=>Math.min(x.fijos/x.ing_ars*100,100));
-const varPctM = DATA.map(x=>Math.min(x.variables/x.ing_ars*100,100));
-new Chart(chPct,{type:'bar',data:{labels,datasets:[
-  {label:'Ganancia',data:DATA.map((x,i)=>Math.max(100-fijPctM[i]-varPctM[i],0)),backgroundColor:'#0B6B57',stack:'p',borderRadius:4},
-  {label:'Gastos fijos',data:fijPctM,backgroundColor:'#C4837B',stack:'p',borderRadius:4},
-  {label:'Insumos y varios',data:varPctM,backgroundColor:'#E4C4BE',stack:'p',borderRadius:4}
-]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-  plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fPct(c.raw)}},legend:{position:'bottom'}},
-  scales:{y:{stacked:true,max:100,ticks:{callback:v=>v+'%'}},x:{stacked:true,ticks:{maxRotation:60}}}}});
-
-// ganancia mensual + promedio acumulado por año
-const promAcum = [];
-{let sum=0,n=0,yr='';
- DATA.forEach(x=>{const y=x.m.slice(0,4); if(y!==yr){yr=y;sum=0;n=0} sum+=x.res_usd;n++;promAcum.push(Math.round(sum/n))});}
-new Chart(chGan,{data:{labels,datasets:[
-  {type:'bar',label:'Ganancia del mes',data:DATA.map(x=>x.res_usd),backgroundColor:DATA.map(x=>x.res_usd<300?'#C4837B':'#0B6B57'),borderRadius:5},
-  {type:'line',label:'Promedio mensual acumulado',data:promAcum,borderColor:'#A8842C',backgroundColor:'#A8842C',tension:.25,pointRadius:2,borderDash:[6,4]}
-]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-  plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fUSD(c.raw)}},legend:{position:'bottom'}},
-  scales:{y:{ticks:{callback:v=>'US$'+v.toLocaleString('es-AR')}},x:{ticks:{maxRotation:60}}}}});
-
-// tabla de resultados mes a mes con acumulados por año
-{let rows = '<thead><tr><th>Mes</th><th>Ganancia %</th><th>Gastos %</th><th>Fijos % de lo que entró</th><th>Ganancia US$</th><th>Acumulado del año</th><th>Promedio mensual</th></tr></thead><tbody>';
- let sum=0,n=0,yr='';
- DATA.forEach((x,i)=>{
-   const y=x.m.slice(0,4);
-   if(y!==yr && yr!==''){
-     rows += `<tr class="hl"><td>Total ${yr}</td><td>${fPct(promMarY(yr))}</td><td></td><td>${fPct(fijPromY(yr))}</td><td>${fUSD(sum)}</td><td></td><td>${fUSD(sum/n)}</td></tr>`;
-   }
-   if(y!==yr){yr=y;sum=0;n=0}
-   sum+=x.res_usd;n++;
-   const fj = x.fijos/x.ing_ars*100;
-   const gcls = x.margen<25?'negtxt':'postxt';
-   const fcls = fj>50?'negtxt':'';
-   rows += `<tr><td>${mesLabel(x.m)}${x.m==='2026-07'?' <span class="pill r">en curso</span>':''}</td><td class="${gcls}">${fPct(x.margen)}</td><td>${fPct(100-x.margen)}</td><td class="${fcls}">${fPct(fj)}</td><td>${fUSD(x.res_usd)}</td><td>${fUSD(sum)}</td><td>${fUSD(sum/n)}</td></tr>`;
- });
- rows += `<tr class="hl"><td>Total ${yr}</td><td>${fPct(promMarY(yr))}</td><td></td><td>${fPct(fijPromY(yr))}</td><td>${fUSD(sum)}</td><td></td><td>${fUSD(sum/n)}</td></tr>`;
- document.getElementById('tblRes').innerHTML = rows + '</tbody>';
- function promMarY(y){const ms=anio(y);return promMar(ms)}
- function fijPromY(y){const ms=anio(y);return ms.reduce((a,x)=>a+x.fijos/x.ing_ars*100,0)/ms.length}
-}
-
-// ── MES A MES ──
-const sel = document.getElementById('selMes');
-DATA.slice().reverse().forEach(x=>{const o=document.createElement('option');o.value=x.m;o.textContent=mesLabel(x.m)+(x.m==='2026-07'?' (en curso)':'');sel.appendChild(o)});
-sel.value = '2026-06';
-let donut = null;
-function renderMes(){
-  const x = DATA.find(d=>d.m===sel.value);
-  document.getElementById('mesBlue').textContent = 'Dólar blue promedio del mes: $' + x.blue.toLocaleString('es-AR') + (x.ing_usd_cash>0 ? ` · Incluye US$ ${x.ing_usd_cash} cobrados en dólares, convertidos a pesos.` : '');
-  const costoSobreIng = x.egr_usd/x.ing_usd*100;
-  const csb = x.res_usd>0 ? x.egr_usd/x.res_usd*100 : null;
-  document.getElementById('kpisMes').innerHTML =
-    kpi('Facturado', fUSD(x.ing_usd), fARS(x.ing_ars)) +
-    kpi('Gastado', fUSD(x.egr_usd), fARS(x.egr_ars)) +
-    kpi('Ganancia', fUSD(x.res_usd), fARS(x.res_ars), x.res_usd<0?'neg':'pos') +
-    kpi('Margen de ganancia', fPct(x.margen), 'de cada $100 que entraron quedaron $'+Math.round(x.margen), x.margen<25?'neg':'pos') +
-    kpi('Gastos fijos / ingresos', fPct(x.fijos/x.ing_ars*100), 'los fijos ('+fARS(x.fijos)+') se llevaron $'+Math.round(x.fijos/x.ing_ars*100)+' de cada $100', x.fijos/x.ing_ars>0.5?'neg':'') +
-    kpi('Costos / ingresos', fPct(costoSobreIng), 'de cada $100 que entraron se gastaron $'+Math.round(costoSobreIng)) +
-    kpi('Costo sobre beneficio', csb!==null?fPct(csb):'—', csb!==null?'gastaste $'+Math.round(csb)+' por cada $100 de ganancia':'sin ganancia este mes','oro');
-  const cats = CATS.filter(c=>x.cats[c]);
-  if(donut) donut.destroy();
-  donut = new Chart(chDonut,{type:'doughnut',data:{labels:cats,datasets:[{data:cats.map(c=>x.cats[c]),backgroundColor:cats.map(c=>CATCOL[c]),borderWidth:2,borderColor:'#fff'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-    plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.label+': '+fARS(c.raw)+' ('+fPct(c.raw/x.egr_ars*100)+')'}}}}});
-  document.getElementById('mesDonutNote').textContent = 'Total gastado: '+fARS(x.egr_ars)+' ('+fUSD(x.egr_usd)+')';
-  let rows = '<thead><tr><th>Rubro</th><th>Pesos</th><th>US$</th><th>% del gasto</th></tr></thead><tbody>';
-  cats.sort((a,b)=>x.cats[b]-x.cats[a]).forEach(c=>{
-    rows += `<tr><td>${c}</td><td>${fARS(x.cats[c])}</td><td>${fUSD(x.cats[c]/x.blue)}</td><td>${fPct(x.cats[c]/x.egr_ars*100)}</td></tr>`;
-  });
-  rows += `<tr class="hl"><td>Total gastado</td><td>${fARS(x.egr_ars)}</td><td>${fUSD(x.egr_usd)}</td><td>100%</td></tr>`;
-  rows += `<tr><td><b>Ganancia del mes</b></td><td class="${x.res_ars<0?'negtxt':'postxt'}">${fARS(x.res_ars)}</td><td class="${x.res_usd<0?'negtxt':'postxt'}">${fUSD(x.res_usd)}</td><td>${fPct(x.margen)} de lo facturado</td></tr>`;
-  document.getElementById('tblMes').innerHTML = rows + '</tbody>';
-}
-sel.addEventListener('change', renderMes);
-renderMes();
-
-// ── ANUAL ──
-function agg(ms){
-  const iu = ms.reduce((a,x)=>a+x.ing_usd,0), eu = ms.reduce((a,x)=>a+x.egr_usd,0);
-  const fij = ms.reduce((a,x)=>a+x.fijos/x.blue,0), vari = ms.reduce((a,x)=>a+x.variables/x.blue,0);
-  const cats = {}; ms.forEach(x=>CATS.forEach(c=>{if(x.cats[c]) cats[c]=(cats[c]||0)+x.cats[c]/x.blue}));
-  return {n:ms.length, iu, eu, ru:iu-eu, fij, vari, cats};
-}
-const A = {'2025':agg(DATA.filter(x=>x.m.startsWith('2025'))),
-           '2026':agg(DATA.filter(x=>x.m.startsWith('2026')))};
-const yl = {'2025':'2025 (año completo)','2026':'2026 (ene–jul, en curso)'};
-const YS = ['2025','2026'];
-const HS = {'2025':9,'2026':3}; // horas semanales trabajadas
-function fila(nombre, fn, cls){return `<tr class="${cls||''}"><td>${nombre}</td>`+YS.map(y=>`<td>${fn(A[y],y)}</td>`).join('')+'</tr>'}
-document.getElementById('tblAnual').innerHTML =
- `<thead><tr><th></th>${YS.map(y=>`<th>${yl[y]}</th>`).join('')}</tr></thead><tbody>` +
- fila('Meses cargados', a=>a.n) +
- fila('Margen promedio mensual', (a,y)=>fPct(promMar(anio(y))), 'hl') +
- fila('Gastos promedio mensual (% de lo que entra)', (a,y)=>fPct(100-promMar(anio(y)))) +
- fila('Gastos fijos (% de lo que entra, promedio mensual)', (a,y)=>fPct(anio(y).reduce((t,x)=>t+x.fijos/x.ing_ars*100,0)/anio(y).length)) +
- fila('Ganancia total (US$)', a=>fUSD(a.ru)) +
- fila('Ganancia promedio por mes (US$)', a=>fUSD(a.ru/a.n)) +
- fila('Costo sobre beneficio', a=>a.ru>0?fPct(a.eu/a.ru*100):'—') +
- fila('Costos fijos (% del gasto)', a=>fPct(a.fij/a.eu*100)) +
- fila('Insumos y varios (% del gasto)', a=>fPct(a.vari/a.eu*100)) +
- fila('Horas trabajadas por semana', (a,y)=>HS[y]+' hs') +
- fila('Ganancia por hora trabajada (US$)', (a,y)=>fUSD(a.ru/a.n/(HS[y]*4.33)), 'hl') +
- '</tbody>';
-
-// análisis por hora trabajada
-const gph25 = A['2025'].ru/12/(HS['2025']*4.33);
-const gph26 = A['2026'].ru/A['2026'].n/(HS['2026']*4.33);
-document.getElementById('kpisHoras').innerHTML =
-  kpi('Horas por mes 2025', Math.round(HS['2025']*4.33)+' hs', '9 hs semanales aprox.') +
-  kpi('Horas por mes 2026', Math.round(HS['2026']*4.33)+' hs', '3 hs semanales aprox.') +
-  kpi('Ganancia por hora 2025', fUSD(gph25), 'cada hora atendida dejó esto, limpio', 'pos') +
-  kpi('Ganancia por hora 2026', fUSD(gph26), 'cada hora atendida deja esto, limpio', gph26<gph25?'neg':'pos');
-document.getElementById('insightHoras').innerHTML =
-  `<b>Lo que revelan las horas:</b> 2026 tiene un tercio de las horas de 2025 (${HS['2026']} vs. ${HS['2025']} semanales), así que era esperable ganar menos. Pero la ganancia no cayó a un tercio: cayó a ${fPct(A['2026'].ru/A['2026'].n/(A['2025'].ru/12)*100)} de la de 2025. La hora trabajada pasó de dejar <b>${fUSD(gph25)}</b> a <b>${fUSD(gph26)}</b>. La explicación son los gastos fijos: el alquiler, el sueldo y las redes cuestan lo mismo se atienda 39 hs al mes o 13, así que cada hora de 2026 arranca cargando un fijo tres veces más pesado.`;
-
-// ene–jul comparación
-const ej25 = agg(DATA.filter(x=>x.m>='2025-01' && x.m<='2025-07'));
-const ej26 = agg(DATA.filter(x=>x.m>='2026-01' && x.m<='2026-07'));
-const varPct = (b,a)=> (b-a)/a*100;
-document.getElementById('tblEneJul').innerHTML =
- `<thead><tr><th></th><th>Ene–jul 2025</th><th>Ene–jul 2026</th><th>Variación</th></tr></thead><tbody>
- <tr><td>Margen promedio mensual</td><td>${fPct(promMar(DATA.filter(x=>x.m>='2025-01'&&x.m<='2025-07')))}</td><td>${fPct(promMar(DATA.filter(x=>x.m>='2026-01')))}</td><td></td></tr>
- <tr><td>Ganancia total (US$)</td><td>${fUSD(ej25.ru)}</td><td>${fUSD(ej26.ru)}</td><td class="${ej26.ru>=ej25.ru?'postxt':'negtxt'}">${(varPct(ej26.ru,ej25.ru)>=0?'+':'')+fPct(varPct(ej26.ru,ej25.ru))}</td></tr>
- <tr><td>Ganancia promedio por mes (US$)</td><td>${fUSD(ej25.ru/7)}</td><td>${fUSD(ej26.ru/7)}</td><td></td></tr>
- </tbody>`;
-
-// estructura de costos 100%
-new Chart(chEstructura,{type:'bar',data:{labels:YS.map(y=>yl[y]),
-  datasets:CATS.map(c=>({label:c,data:YS.map(y=>A[y].cats[c]? A[y].cats[c]/A[y].eu*100 : 0),backgroundColor:CATCOL[c],borderRadius:4}))},
-  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
-  plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fPct(c.raw)}},legend:{position:'bottom'}},
-  scales:{x:{stacked:true,max:100,ticks:{callback:v=>v+'%'}},y:{stacked:true}}}});
-
-document.getElementById('insightAnual').innerHTML =
- `<b>Cómo leer la tabla:</b> en 2025 un mes típico dejaba el ${fPct(promMar(anio('2025')))} de lo que entraba, con una ganancia promedio de ${fUSD(A['2025'].ru/12)} por mes. En 2026 el mes típico deja el ${fPct(promMar(anio('2026')))}, con ${fUSD(A['2026'].ru/A['2026'].n)} de ganancia promedio. Además, el peso de los costos fijos dentro del gasto subió: cuando entra menos, el alquiler y el sueldo se comen una porción mucho más grande.`;
-
-// ── COSTOS ──
-const u6 = DATA.slice(-7,-1); // últimos 6 meses completos
-const fijProm = u6.reduce((a,x)=>a+x.fijos/x.blue,0)/u6.length;
-const AtotAll = agg(DATA);
-const insumosPctIng = AtotAll.vari/AtotAll.iu*100;
-document.getElementById('kpisCostos').innerHTML =
-  kpi('Costo fijo mensual actual', fUSD(fijProm), 'promedio últimos 6 meses') +
-  kpi('Piso de facturación', fUSD(fijProm/(1-insumosPctIng/100)), 'para no perder plata, contando insumos','oro') +
-  kpi('Fijos sobre facturación 2026', fPct(A['2026'].fij/A['2026'].iu*100), 'en 2025 era '+fPct(A['2025'].fij/A['2025'].iu*100), 'neg');
-
-new Chart(chFijos,{data:{labels,datasets:[
-  {type:'bar',label:'Costos fijos',data:DATA.map(x=>x.fijos/x.blue),backgroundColor:'#0B6B57',stack:'e',borderRadius:4},
-  {type:'bar',label:'Insumos y varios',data:DATA.map(x=>x.variables/x.blue),backgroundColor:'#C4837B',stack:'e',borderRadius:4},
-  {type:'line',label:'Facturado',data:DATA.map(x=>x.ing_usd),borderColor:'#A8842C',backgroundColor:'#A8842C',tension:.3,pointRadius:2}
-]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-  plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fUSD(c.raw)}},legend:{position:'bottom'}},
-  scales:{y:{stacked:true,ticks:{callback:v=>'US$'+v.toLocaleString('es-AR')}},x:{stacked:true,ticks:{maxRotation:60}}}}});
-
-// tabla rubros % sobre ingresos
-const Atot = agg(DATA);
-let rr = '<thead><tr><th>Rubro</th><th>% de lo facturado (todo el período)</th><th>% de lo facturado (2026)</th></tr></thead><tbody>';
-CATS.forEach(c=>{
-  const t = Atot.cats[c]||0, t26 = A['2026'].cats[c]||0;
-  if(!t && !t26) return;
-  rr += `<tr><td>${c}</td><td>${fPct(t/Atot.iu*100)}</td><td>${t26?fPct(t26/A['2026'].iu*100):'—'}</td></tr>`;
+/* ══════════ CONFIGURACIÓN — editar acá cuando lleguen los datos reales ══════════ */
+const CONFIG = {
+  whatsapp: "5491100000000",           // ← PENDIENTE: número real sin +, ej: 5491155551234
+  mensaje: "Hola Agustina! Quiero reservar una consulta de evaluación.",
+  instagram: "",                        // ← PENDIENTE: handle sin @, ej: agustinarobledo.estetica
+  direccion: "[Zona / dirección pendiente]"
+};
+/* ════════════════════════════════════════════════════════════════════════════════ */
+const wa = tratamiento => "https://wa.me/" + CONFIG.whatsapp + "?text=" +
+  encodeURIComponent(tratamiento ? "Hola Agustina! Quiero consultar por " + tratamiento + "." : CONFIG.mensaje);
+["ctaNav","ctaHero","ctaContacto","ctaFlot"].forEach(id => document.getElementById(id).href = wa());
+document.querySelectorAll(".tx").forEach(card => {
+  const t = card.querySelector("h3").textContent.toLowerCase();
+  card.querySelector(".tx-cta").href = wa(t);
 });
-rr += `<tr class="hl"><td>Total costos</td><td>${fPct(Atot.eu/Atot.iu*100)}</td><td>${fPct(A['2026'].eu/A['2026'].iu*100)}</td></tr>`;
-document.getElementById('tblRubros').innerHTML = rr + '</tbody>';
-
-document.getElementById('insightCostos').innerHTML =
- `<b>Dato clave:</b> hoy el consultorio necesita facturar al menos <b>${fUSD(fijProm)}</b> por mes solo para cubrir los costos fijos (sueldo, redes, alquiler, residuos y contadora), antes de comprar un solo insumo. En 2026 hubo meses que quedaron muy cerca de ese piso: marzo dejó solo ${fUSD(DATA.find(x=>x.m==='2026-03').res_usd)} y junio ${fUSD(DATA.find(x=>x.m==='2026-06').res_usd)}.`;
-
-// tabs
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
-  b.classList.add('on');
-  document.getElementById('p-'+b.dataset.p).classList.add('on');
-  window.scrollTo({top:0});
-}));
+document.getElementById("anio").textContent = new Date().getFullYear();
+document.getElementById("datoDir").textContent = "📍 " + CONFIG.direccion;
+if (CONFIG.instagram) {
+  const ig = document.getElementById("datoIg");
+  ig.innerHTML = '✦ <a href="https://instagram.com/' + CONFIG.instagram + '" target="_blank" rel="noopener" style="color:inherit">@' + CONFIG.instagram + "</a>";
+}
 </script>
 </body>
 </html>
