@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 110" role="img" aria-label="Dra. Agustina Robledo, Medicina Estética">
+  <!-- Monograma: doble anillo salvia/rosa con hoja -->
+  <g>
+    <circle cx="55" cy="55" r="44" fill="none" stroke="#0B6B57" stroke-width="1.8"/>
+    <circle cx="55" cy="55" r="38.5" fill="none" stroke="#C4837B" stroke-width="1"/>
+    <path d="M55 13 q6 -7 12 -4 q-4 7 -12 4" fill="#0B6B57"/>
+    <text x="55" y="66" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="32" font-weight="600" fill="#1D2422" letter-spacing="1.5">AR</text>
+  </g>
+  <!-- Wordmark -->
+  <g>
+    <text x="118" y="48" font-family="Fraunces, Georgia, serif" font-size="25" font-weight="600" fill="#1D2422">Dra. Agustina</text>
+    <text x="118" y="76" font-family="Fraunces, Georgia, serif" font-size="25" font-weight="600" fill="#1D2422">Robledo</text>
+    <text x="118" y="95" font-family="Instrument Sans, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#0B6B57" letter-spacing="3.5">MEDICINA ESTÉTICA</text>
+  </g>
+</svg>
