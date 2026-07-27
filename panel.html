@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dra. Agustina Robledo · Panel interno</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
-  --bg:#F3F6F4; --card:#FFFFFF; --ink:#182320; --muted:#5E6E68;
-  --verde:#0B6B57; --verdeSoft:#DFEDE7; --rosa:#C4837B; --rosaSoft:#F6E9E7;
-  --oro:#A8842C; --line:#E3E9E6; --neg:#B04A3E;
+  --bg:#F7EDE3; --card:#FFFFFF; --ink:#3A2F24; --muted:#8B7A66;
+  --verde:#8C6F4E; --verdeSoft:#F0E3D2; --rosa:#B99B72; --rosaSoft:#F5EBDD;
+  --oro:#A0793F; --line:#E9DCC9; --neg:#B04A3E;
   --disp:'Fraunces', Georgia, serif; --body:'Instrument Sans', system-ui, sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -233,9 +233,9 @@ const fUSD = n => 'US$ ' + Math.round(n).toLocaleString('es-AR');
 const fARS = n => '$ ' + Math.round(n).toLocaleString('es-AR');
 const fPct = n => n.toLocaleString('es-AR',{maximumFractionDigits:1}) + '%';
 const CATS = ['Insumos','Sueldo Cata','Redes','Alquiler','Residuos','Contadora','Traslados','Otros'];
-const CATCOL = {'Insumos':'#C4837B','Sueldo Cata':'#0B6B57','Redes':'#4E9C86','Alquiler':'#7FB6A4','Residuos':'#B7C9C0','Contadora':'#94A8A0','Traslados':'#D9C08A','Otros':'#C9CFCB'};
+const CATCOL = {'Insumos':'#B99B72','Sueldo Cata':'#8C6F4E','Redes':'#A98F68','Alquiler':'#C7B08B','Residuos':'#DCCBAD','Contadora':'#B4A488','Traslados':'#D3BC8F','Otros':'#CFC4B2'};
 Chart.defaults.font.family = "'Instrument Sans', system-ui, sans-serif";
-Chart.defaults.color = '#5E6E68';
+Chart.defaults.color = '#8B7A66';
 
 // ── agregados centrados en resultados mensuales ──
 const margenProm = DATA.reduce((a,x)=>a+x.margen,0)/DATA.length;
@@ -274,9 +274,9 @@ const labels = DATA.map(x=>mesCorto(x.m));
 const fijPctM = DATA.map(x=>Math.min(x.fijos/x.ing_ars*100,100));
 const varPctM = DATA.map(x=>Math.min(x.variables/x.ing_ars*100,100));
 new Chart(chPct,{type:'bar',data:{labels,datasets:[
-  {label:'Ganancia',data:DATA.map((x,i)=>Math.max(100-fijPctM[i]-varPctM[i],0)),backgroundColor:'#0B6B57',stack:'p',borderRadius:4},
-  {label:'Gastos fijos',data:fijPctM,backgroundColor:'#C4837B',stack:'p',borderRadius:4},
-  {label:'Insumos y varios',data:varPctM,backgroundColor:'#E4C4BE',stack:'p',borderRadius:4}
+  {label:'Ganancia',data:DATA.map((x,i)=>Math.max(100-fijPctM[i]-varPctM[i],0)),backgroundColor:'#8C6F4E',stack:'p',borderRadius:4},
+  {label:'Gastos fijos',data:fijPctM,backgroundColor:'#B99B72',stack:'p',borderRadius:4},
+  {label:'Insumos y varios',data:varPctM,backgroundColor:'#E8D6BB',stack:'p',borderRadius:4}
 ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
   plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fPct(c.raw)}},legend:{position:'bottom'}},
   scales:{y:{stacked:true,max:100,ticks:{callback:v=>v+'%'}},x:{stacked:true,ticks:{maxRotation:60}}}}});
@@ -286,8 +286,8 @@ const promAcum = [];
 {let sum=0,n=0,yr='';
  DATA.forEach(x=>{const y=x.m.slice(0,4); if(y!==yr){yr=y;sum=0;n=0} sum+=x.res_usd;n++;promAcum.push(Math.round(sum/n))});}
 new Chart(chGan,{data:{labels,datasets:[
-  {type:'bar',label:'Ganancia del mes',data:DATA.map(x=>x.res_usd),backgroundColor:DATA.map(x=>x.res_usd<300?'#C4837B':'#0B6B57'),borderRadius:5},
-  {type:'line',label:'Promedio mensual acumulado',data:promAcum,borderColor:'#A8842C',backgroundColor:'#A8842C',tension:.25,pointRadius:2,borderDash:[6,4]}
+  {type:'bar',label:'Ganancia del mes',data:DATA.map(x=>x.res_usd),backgroundColor:DATA.map(x=>x.res_usd<300?'#B99B72':'#8C6F4E'),borderRadius:5},
+  {type:'line',label:'Promedio mensual acumulado',data:promAcum,borderColor:'#A0793F',backgroundColor:'#A0793F',tension:.25,pointRadius:2,borderDash:[6,4]}
 ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
   plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fUSD(c.raw)}},legend:{position:'bottom'}},
   scales:{y:{ticks:{callback:v=>'US$'+v.toLocaleString('es-AR')}},x:{ticks:{maxRotation:60}}}}});
@@ -419,9 +419,9 @@ document.getElementById('kpisCostos').innerHTML =
   kpi('Fijos sobre facturación 2026', fPct(A['2026'].fij/A['2026'].iu*100), 'en 2025 era '+fPct(A['2025'].fij/A['2025'].iu*100), 'neg');
 
 new Chart(chFijos,{data:{labels,datasets:[
-  {type:'bar',label:'Costos fijos',data:DATA.map(x=>x.fijos/x.blue),backgroundColor:'#0B6B57',stack:'e',borderRadius:4},
-  {type:'bar',label:'Insumos y varios',data:DATA.map(x=>x.variables/x.blue),backgroundColor:'#C4837B',stack:'e',borderRadius:4},
-  {type:'line',label:'Facturado',data:DATA.map(x=>x.ing_usd),borderColor:'#A8842C',backgroundColor:'#A8842C',tension:.3,pointRadius:2}
+  {type:'bar',label:'Costos fijos',data:DATA.map(x=>x.fijos/x.blue),backgroundColor:'#8C6F4E',stack:'e',borderRadius:4},
+  {type:'bar',label:'Insumos y varios',data:DATA.map(x=>x.variables/x.blue),backgroundColor:'#B99B72',stack:'e',borderRadius:4},
+  {type:'line',label:'Facturado',data:DATA.map(x=>x.ing_usd),borderColor:'#A0793F',backgroundColor:'#A0793F',tension:.3,pointRadius:2}
 ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
   plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fUSD(c.raw)}},legend:{position:'bottom'}},
   scales:{y:{stacked:true,ticks:{callback:v=>'US$'+v.toLocaleString('es-AR')}},x:{stacked:true,ticks:{maxRotation:60}}}}});
@@ -454,7 +454,7 @@ document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
 
 <div class="gate" id="gate">
   <div class="box">
-    <svg class="monog" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37" fill="none" stroke="#0B6B57" stroke-width="1.4"/><circle cx="40" cy="40" r="32.5" fill="none" stroke="#C4837B" stroke-width=".8"/><text x="40" y="49" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="27" font-weight="600" fill="#182320" letter-spacing="1">AR</text></svg>
+    <img class="monog" src="img/logo-mark.png" alt="" style="width:86px;height:auto">
     <h2>Panel interno</h2>
     <p>Dra. Agustina Robledo · Números del consultorio</p>
     <input type="password" id="clave" placeholder="Clave de acceso" autocomplete="current-password" onkeydown="if(event.key==='Enter')intentar()">
